@@ -14,7 +14,7 @@ func main() {
 	
 
 	utilsMap := map[string]  interface{}  {
-		"scanports" : scanports.Run,
+		"port" : port.Run,
 	}
 
 	if len(os.Args)<2  {
@@ -32,7 +32,5 @@ func main() {
 		os.Exit(1)
 	}
 
-	status := utilsMap[utilName].(func([]string) )(args)
-
-	os.Exit(status)
+	utilsMap[utilName].(func([]string) )(args)
 }
