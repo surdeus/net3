@@ -19,8 +19,14 @@ Run(args []string) {
 	}
 	
 	for _, dev := range devs {
-		fmt.Printf("%s\t\"%s\"\n",
+		fmt.Printf("%s\t\"%s\"\t",
 			dev.Name, dev.Description)
+		for _, addr := range dev.Addresses {
+			ones, _ := addr.Netmask.Size()
+			fmt.Printf("%s/%d,", addr.IP.String(),
+				ones)
+		}
+		fmt.Println("")
 	}
 }
 
