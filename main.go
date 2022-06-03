@@ -3,7 +3,7 @@ package main
 import(
 	"fmt"
 	"os"
-	"net3/port"
+	"github.com/k1574/net3/port"
 )
 
 func main() {
