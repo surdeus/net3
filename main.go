@@ -5,6 +5,7 @@ import(
 	"os"
 	"github.com/k1574/net3/devlist"
 	"github.com/k1574/net3/port"
+	"github.com/k1574/net3/cap"
 )
 
 func main() {
@@ -17,6 +18,7 @@ func main() {
 	utilsMap := map[string]  interface{}  {
 		"port" : port.Run,
 		"devlist" : devlist.Run,
+		"cap" : cap.Run,
 	}
 
 	if len(os.Args)<2  {
