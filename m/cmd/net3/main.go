@@ -3,9 +3,9 @@ package main
 import(
 	"fmt"
 	"os"
-	"github.com/k1574/net3/devlist"
-	"github.com/k1574/net3/port"
-	"github.com/k1574/net3/cap"
+	"github.com/k1574/net3/m/tool/devlist"
+	"github.com/k1574/net3/m/tool/port"
+	"github.com/k1574/net3/m/tool/cap"
 )
 
 func main() {
