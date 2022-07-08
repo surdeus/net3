@@ -3,8 +3,8 @@ package main
 import(
 	"fmt"
 	"os"
-	"github.com/k1574/net3/m/tool/devlist"
-	"github.com/k1574/net3/m/tool/port"
+	"github.com/k1574/net3/m/tool/lsdev"
+	"github.com/k1574/net3/m/tool/nmap"
 	"github.com/k1574/net3/m/tool/cap"
 )
 
@@ -16,8 +16,8 @@ func main() {
 	
 
 	utilsMap := map[string]  interface{}  {
-		"port" : port.Run,
-		"devlist" : devlist.Run,
+		"map" : nmap.Run,
+		"lsdev" : lsdev.Run,
 		"cap" : cap.Run,
 	}
 
