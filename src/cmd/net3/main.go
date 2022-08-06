@@ -3,9 +3,9 @@ package main
 import(
 	"fmt"
 	"os"
-	"github.com/k1574/net3/m/tool/lsdev"
-	"github.com/k1574/net3/m/tool/nmap"
-	"github.com/k1574/net3/m/tool/cap"
+	"github.com/surdeus/net3/src/tool/lsdev"
+	"github.com/surdeus/net3/src/tool/nmap"
+	"github.com/surdeus/net3/src/tool/cap"
 )
 
 func main() {

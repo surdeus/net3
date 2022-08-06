@@ -1,4 +1,4 @@
-module github.com/k1574/net3
+module github.com/surdeus/net3
 
 go 1.17
 
