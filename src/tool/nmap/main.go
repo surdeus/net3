@@ -9,6 +9,7 @@ import(
 	"log"
 	"time"
 	//"fmt"
+	"sync"
 )
 
 var(
@@ -16,25 +17,36 @@ var(
 	addr = "127.0.0.1"
 	stdtp = "tcp"
 	wr *csv.Writer
+	wg sync.WaitGroup
 )
 
 func
-ScanPort(rec []string) error {
-
+ScanPort(rec []string) {
 	tp := rec[0]
 	a := rec[1]
-	_, err := net.Dial(tp, a)
-	if err != nil {
-		log.Println(err)
-		return err
+
+	conn, err := net.Dial(tp, a)
+	if err == nil {
+		conn.Close()
 	}
 
 	t := time.Now()
-	rec = append([]string{t.String()}, rec...)
+	rec = append(
+		[]string{
+			t.String(),
+		},
+		rec...,
+	)
+	if err != nil {
+		rec = append(rec, err.Error())
+	} else {
+		rec = append(rec, "")
+	}
+
 	wr.Write(rec)
 	wr.Flush()
 
-	return nil
+	wg.Done()
 }
 
 func
@@ -43,8 +55,8 @@ Run(args []string) {
 	args = args[1:]
 	rd := csv.NewReader(os.Stdin)
 	wr = csv.NewWriter(os.Stdout)
-	wr.Comma,  rd.Comma = '\t', '\t'
-	wr.Write([]string{"Time", "Type", "Target"})
+	wr.Comma, rd.Comma = '\t', '\t'
+	wr.Write([]string{"Time", "Type", "Target", "Error"})
 	wr.Flush()
 	rec, err := rd.Read()
 	if err != nil {
@@ -55,14 +67,17 @@ Run(args []string) {
 		log.Println(err)
 		os.Exit(1)
 	}
+
 	for {
 		rec, err := rd.Read()
 		if err == io.EOF {
-			os.Exit(0)
+			break
 		} else if err != nil {
 			log.Println(err)
 		}
+		wg.Add(1)
 		go ScanPort(rec)
 	}
+	wg.Wait()
 }
 

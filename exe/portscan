@@ -1,0 +1,11 @@
+#!/bin/sh
+
+hosts=$@
+ports=`goblin range 1 1000`
+
+{ echo '1	2'
+for p in $ports; do
+	for h in $hosts ; do
+		echo "tcp\t$h:$p"
+	done
+done } | ./net3 map | goawk -i tsv '/.*/ {if($4 == ""){ print $3 }}'
